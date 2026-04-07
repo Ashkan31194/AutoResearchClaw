@@ -600,7 +600,7 @@ def _execute_literature_collect(
 
 
 _MAX_ABSTRACT_LEN = 800  # Truncate long abstracts to reduce token usage
-_MAX_CANDIDATES_CHARS = 30_000  # Cap total candidates text sent to LLM
+_MAX_CANDIDATES_CHARS = 8000  # Cap total candidates text sent to LLM to fit 4K context models
 
 
 def _execute_literature_screen(
@@ -744,11 +744,13 @@ def _execute_knowledge_extract(
     prompts: PromptManager | None = None,
 ) -> StageResult:
     shortlist = _read_prior_artifact(run_dir, "shortlist.jsonl") or ""
+    if len(shortlist) > 6000:
+        shortlist = shortlist[:6000].rsplit("\n", 1)[0]
 
     # Inject web context from Stage 4 if available
     web_context = _read_prior_artifact(run_dir, "web_context.md") or ""
     if web_context:
-        shortlist = shortlist + "\n\n--- Web Search Context ---\n" + web_context[:10_000]
+        shortlist = shortlist + "\n\n--- Web Search Context ---\n" + web_context[:2000]
 
     cards_dir = stage_dir / "cards"
     cards_dir.mkdir(parents=True, exist_ok=True)

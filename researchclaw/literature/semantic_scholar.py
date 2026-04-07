@@ -44,8 +44,8 @@ _TIMEOUT_SEC = 30
 # ---------------------------------------------------------------------------
 
 _CB_THRESHOLD = 3           # consecutive 429s to trip
-_CB_INITIAL_COOLDOWN = 120  # seconds before first HALF_OPEN probe
-_CB_MAX_COOLDOWN = 600      # cap cooldown at 10 minutes
+_CB_INITIAL_COOLDOWN = 30  # seconds before first HALF_OPEN probe
+_CB_MAX_COOLDOWN = 30      # cap cooldown at 30 seconds
 
 # States
 _CB_CLOSED = "closed"

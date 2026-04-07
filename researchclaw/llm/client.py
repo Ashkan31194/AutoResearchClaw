@@ -324,7 +324,7 @@ class LLMClient:
                         )
                     )
                     if not _transient_400:
-                        raise  # Genuine bad request — don't retry
+                        raise RuntimeError(f"HTTP 400 details: {body}") from e
 
                 # Retryable: 429 (rate limit), transient 400, 500, 502, 503, 504,
                 # 529 (Anthropic overloaded)

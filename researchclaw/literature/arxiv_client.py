@@ -36,8 +36,8 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 _CB_THRESHOLD = 3
-_CB_INITIAL_COOLDOWN = 180
-_CB_MAX_COOLDOWN = 600
+_CB_INITIAL_COOLDOWN = 30
+_CB_MAX_COOLDOWN = 30
 
 _CB_CLOSED = "closed"
 _CB_OPEN = "open"
